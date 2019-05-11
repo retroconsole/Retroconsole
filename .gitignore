@@ -1,0 +1,8 @@
+*.o
+*.hex
+*.map
+*.elf
+*.pgm
+*.ipch
+*.bin
+sprite_gen/*.h
