@@ -99,6 +99,7 @@ void PATTERNMain()
 			while((PIND & 0x3C) == 0x3C)
 			{
 				_delay_ms(1);
+				if (BUTTONGet(BUTTON2)) break;
 			}
 			if(BUTTONGet(LEFT+boxValue))
 			{

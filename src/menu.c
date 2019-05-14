@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "lcd.h"
 
 static const char mainHeader[] PROGMEM = "  RetroConsole";
 static const char game_1[] PROGMEM = "Pattern";
@@ -14,7 +15,37 @@ static const char setting2[] PROGMEM = "Backlight";
 static const char doneby[] PROGMEM = "Done by:";
 static const char sall[] PROGMEM = "M.Sall";
 static const char siimer[] PROGMEM = "K.Siimer";
+static const char repoText[] PROGMEM = "Repository:";
 
+static const uint8_t repo[][4] PROGMEM= {
+{0b11111110, 0b00101100, 0b10111111, 0b10000000},
+{0b10000010, 0b10100111, 0b10100000, 0b10000000},
+{0b10111010, 0b00001010, 0b00101110, 0b10000000},
+{0b10111010, 0b11101111, 0b00101110, 0b10000000},
+{0b10111010, 0b01000100, 0b10101110, 0b10000000},
+{0b10000010, 0b11011111, 0b10100000, 0b10000000},
+{0b11111110, 0b10101010, 0b10111111, 0b10000000},
+{0b00000000, 0b01110000, 0b10000000, 0b00000000},
+{0b11111011, 0b11010110, 0b01010101, 0b00000000},
+{0b00000100, 0b00101010, 0b10010001, 0b00000000},
+{0b10000111, 0b10100101, 0b01011101, 0b10000000},
+{0b10111001, 0b10001010, 0b01111001, 0b10000000},
+{0b11110110, 0b11101111, 0b10101110, 0b00000000},
+{0b11101100, 0b11000100, 0b10010110, 0b00000000},
+{0b10001010, 0b01011111, 0b01011101, 0b10000000},
+{0b10000001, 0b10110011, 0b11000001, 0b00000000},
+{0b10001111, 0b11010111, 0b11111011, 0b10000000},
+{0b00000000, 0b11101100, 0b10001000, 0b00000000},
+{0b11111110, 0b10100010, 0b10101001, 0b10000000},
+{0b10000010, 0b01101000, 0b10001001, 0b00000000},
+{0b10111010, 0b10001111, 0b11111111, 0b10000000},
+{0b10111010, 0b11000000, 0b01101101, 0b10000000},
+{0b10111010, 0b10111010, 0b01010110, 0b10000000},
+{0b10000010, 0b11010011, 0b10101100, 0b10000000},
+{0b11111110, 0b11011000, 0b00011111, 0b10000000}
+};
+
+Sprite repoSprite = {25, 25, 4, *repo};
 
 
 char buffer[15];
@@ -85,7 +116,7 @@ void MENUMain(void)
 			else if(selection == MENU_SELECTION_ABOUT)
 			{
 				while(1) {
-				char buffer[9];
+				char buffer[20];
 				strcpy_P(buffer, doneby);
 				LCDPrintString(buffer);
 				LCDNewLine();
@@ -95,6 +126,11 @@ void MENUMain(void)
 				strcpy_P(buffer, siimer);
 				LCDPrintString(buffer);
 				LCDNewLine();
+				LCDNewLine();
+				strcpy_P(buffer, repoText);
+				LCDPrintString(buffer);
+				LCDNewLine();
+				LCDPlaceSprite(83-25,47-25,0, repoSprite);
 				LCDRender();
 				_delay_ms(100);
 				if (BUTTONGet(LEFT)) {

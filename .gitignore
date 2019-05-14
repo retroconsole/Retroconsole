@@ -6,3 +6,4 @@
 *.ipch
 *.bin
 sprite_gen/*.h
+.vscode
